@@ -8,7 +8,7 @@
 
 初始化的核心输出是 INDEX.md、PROJECT.md、BACKLOG.md、STATE.md 和真实模块的 MAP.md / CONTEXT.md。任务与集中工作计划按实际请求建立，分工直接记录在任务中。尚无任务证据时 STATE.md 记录初始调查状态，不虚构完成数。
 
-使用 [backlog.md](../assets/templates/backlog.md) 创建可由用户手写的需求收集箱，维护规则见 [backlog.md](backlog.md)。已有用户清单时保留并引用，或按已授权范围整理；不要把整个 PRD、已有实现或智能体建议都导入成用户的新需求。没有用户输入时保留空清单，不填入虚构想法。
+使用 [backlog.md](../assets/templates/backlog.md) 创建简洁的用户需求清单，维护规则见 [backlog.md](backlog.md)。初始化保留空清单或用户已有条目；仅当用户明确要求加入清单时添加。调查发现、智能体建议、已有 PRD 和普通功能反馈都不自动导入，发现的问题记录在 STATE 或相关任务中。
 
 ## 建立地图
 
