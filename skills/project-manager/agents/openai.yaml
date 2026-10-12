@@ -1,0 +1,4 @@
+interface:
+  display_name: "项目管家"
+  short_description: "收集需求与灵感，维护项目目录地图、任务分工、验证进度和交接记录"
+  default_prompt: "使用 $project-manager 分析当前项目，建立或更新 .project 管理资料，并指出当前进度和阻塞。"
