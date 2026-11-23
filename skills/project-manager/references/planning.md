@@ -10,22 +10,19 @@ PLAN 描述方案、跨模块协作、任务引用和实施顺序。TASK 直接�
 
 ## 标识与字段
 
-任务元信息使用以下字段：
+任务元信息默认采用 **Lite 字段**（单人 + AI 足够使用），有明确多人分工、阻塞依赖或独立评审需求时按需补充 **Team 可选字段**（不必填满 `null`）：
 
-| 字段 | 含义 |
-| --- | --- |
-| id / title | 稳定唯一 ID / 简短任务名称 |
-| feature / modules | 工作分组标识 / 涉及模块列表；未知分组可为 null |
-| owner / assignee / reviewer | 交付负责人 / 当前执行者 / 已有安排中的评审者；未知为 null |
-| status | 生命周期状态，见 verification.md |
-| priority | p0 / p1 / p2 / p3，未决定为 null；正文说明理由 |
-| depends_on | 前置任务 ID 列表，仅表达阻塞依赖 |
-| write_scope | 预计修改的仓库相对路径或目录；是协作声明，不是锁 |
-| source | 原始想法 ID、已有文档或用户请求出处，未知为 null |
-| updated_at | 实际更新时间，ISO 格式字符串 |
-| verification | 状态、核实时间、核实版本；具体依据在正文 |
+| 级别 | 字段 | 含义 |
+| --- | --- | --- |
+| Lite（必填） | `id` / `title` | 稳定唯一 ID（必须与目录名完全一致）/ 简短任务名称 |
+| Lite（必填） | `status` | 生命周期状态，见 verification.md |
+| Lite（必填） | `verification` | `status`、`checked_at`、`revision`；具体依据在正文 |
+| Team（可选） | `feature` / `modules` | 工作分组标识 / 涉及模块列表 |
+| Team（可选） | `owner` / `assignee` / `reviewer` | 交付负责人 / 当前执行者 / 评审者 |
+| Team（可选） | `priority` / `depends_on` / `write_scope` | 优先级（p0–p3）/ 阻塞前置 ID 列表 / 预计修改路径 |
+| Team（可选） | `source` / `updated_at` | 原始想法或请求出处 / ISO 更新时间 |
 
-复用已有 ID。串行创建可沿用项目编号；并行创建使用随机后缀，例如 CHAT-8c9c4d2e，并检查唯一性。标题、顺序或归档变化不修改 ID。替换模板中的 TASK-ID。
+复用已有 ID。串行创建前必须运行 `scripts/check_project.py --root <仓库根目录> --next-id <PREFIX>`（或扫描 `tasks/` 与 `archive/` 已有目录及 YAML `id`）取下一个可用编号，杜绝撞号；并行创建使用随机后缀（例如 `CHAT-8c9c4d2e`）并检查唯一性。标题、顺序或归档变化不修改 ID。替换模板中的 `TASK-ID`。
 
 代码路径相对于仓库根目录；Markdown 导航链接相对于当前文档。YAML 日期时间加引号，空列表用 []，未知值用 null。
 

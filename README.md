@@ -86,8 +86,9 @@
 ## 仓库结构
 
 - [SKILL.md](skills/project-manager/SKILL.md)：技能入口与共用规则。
+- [scripts/check_project.py](skills/project-manager/scripts/check_project.py)：零依赖校验脚本（任务 ID/依赖/统计、相对链接、MAP 路径核对与 `--next-id`）。
 - [references/](skills/project-manager/references/)：初始化、需求收集、任务规划、协作和进度核实流程。
-- [assets/templates/](skills/project-manager/assets/templates/)：10 个项目资料模板。
+- [assets/templates/](skills/project-manager/assets/templates/)：11 个项目资料模板（含 `AGENTS.md` 轻量同步片段 `agents-snippet.md`）。
 - [agents/openai.yaml](skills/project-manager/agents/openai.yaml)：技能界面信息。
 
 维护技能时修改 `skills/project-manager/`；更新安装副本时保留使用者项目中的 `.project/` 资料。
