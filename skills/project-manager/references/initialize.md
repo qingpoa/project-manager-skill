@@ -6,7 +6,7 @@
 
 已有 `.project/` 时增量补齐并维护。已有等价 PRD、接口文档或任务系统时在 INDEX.md 引用，避免另建一套相互矛盾的资料；用户明确要求迁移时再整理。不要将引导模板写入 skill 安装目录。
 
-初始化的核心输出是 INDEX.md、PROJECT.md、BACKLOG.md、STATE.md 和真实模块的 MAP.md / CONTEXT.md。任务与集中工作计划按实际请求建立，分工直接记录在任务中。尚无任务证据时 STATE.md 记录初始调查状态，不虚构完成数。
+初始化的核心输出是 INDEX.md、PROJECT.md、BACKLOG.md、STATE.md 和真实模块的 MAP.md / CONTEXT.md。可选的编码与架构规范 [CONVENTIONS.md](../assets/templates/conventions.md) **仅在用户要求制定、提炼或启用时创建**，不作为初始化强制必选产物。任务与集中工作计划按实际请求建立，分工直接记录在任务中。尚无任务证据时 STATE.md 记录初始调查状态，不虚构完成数。
 
 使用 [backlog.md](../assets/templates/backlog.md) 创建简洁的用户需求清单，维护规则见 [backlog.md](backlog.md)。初始化保留空清单或用户已有条目；仅当用户明确要求加入清单时添加。调查发现、智能体建议、已有 PRD 和普通功能反馈都不自动导入，发现的问题记录在 STATE 或相关任务中。
 
@@ -35,4 +35,14 @@
 
 从文档和代码梳理当前能力，将已观察实现、待验证、缺失和未调查明确区分。优先级依据用户目标及依赖关系；没有负责人、期限或预算时标记待确认。只有缺失信息阻止正确选定仓库或工作范围时才询问，不为填写每个字段逐项提问。
 
-创建后运行 `scripts/check_project.py --root <仓库根目录>` 校验地图路径存在、链接可达、没有职责重复覆盖或遗漏的未说明范围。在用户要求或已有项目约定授权时，参照 [agents-snippet.md](../assets/templates/agents-snippet.md) 将轻量同步规则合并到项目根 `AGENTS.md`（先读再改，不覆盖已有约定）。最后向用户交付入口及调查结论。
+创建后运行 `scripts/check_project.py --root <仓库根目录>` 校验地图路径存在、链接可达、没有职责重复覆盖或遗漏的未说明范围。在用户要求或已有项目约定授权时，参照 [agents-snippet.md](../assets/templates/agents-snippet.md) 将轻量同步规则及可选规范读取指引合并到项目根 `AGENTS.md`（先读再改，不覆盖已有约定）。最后向用户交付入口及调查结论。
+
+## 编码与架构规范（可选）
+
+当用户希望设定或沉淀“当前项目应当按照什么规范写代码/做扩展”时，参考 [conventions.md](../assets/templates/conventions.md) 在 `.project/CONVENTIONS.md` 维护项目专属规范：
+
+1. **按需创建**：没有需求时不强行生成空壳文件；已有 linter/formatter 默认能检查的格式细节不重复堆砌，聚焦架构分层、扩展预留接口、兼容/安全红线、测试门槛与明确禁止的反模式。
+2. **先核对现状**：提炼规范前读取仓库既有 `AGENTS.md`、构建/lint 配置（如 `pyproject.toml`、`oxlint`/`eslint`/`tsconfig`）及核心目录，确保约定与真实工具链和代码边界一致。
+3. **入口关联**：创建后在 `.project/INDEX.md` 添加链接，并在根目录 `AGENTS.md`（参照 [agents-snippet.md](../assets/templates/agents-snippet.md)）写入“编码前读取 `.project/CONVENTIONS.md`”指引，保证日常编码无需手动唤醒 `project-manager` 也能自动生效。
+4. **单源与协同提醒**：如项目将 `.project/` 设为 Git 忽略而仓库由多人协同，需向用户说明 `.project/CONVENTIONS.md` 不会随普通提交分享给他人；若需团队共享，应只把关键规则链接或放入受版本控制的 `AGENTS.md`，避免两边各自修改造成漂移。
+5. **原地更新**：规范随架构演进时，经用户确认后原地修改 `.project/CONVENTIONS.md`，不按日期堆叠变更流水。

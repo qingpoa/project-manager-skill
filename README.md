@@ -30,6 +30,7 @@
 | 想做什么 | 可以这样说 |
 | --- | --- |
 | 建立项目地图 | 使用 $project-manager 分析当前项目，建立带文件职责注解的目录树。 |
+| 设定编码规范 | 使用 $project-manager 为当前项目启用 CONVENTIONS.md，记录架构分层与编码规范。 |
 | 收集一个想法 | 使用 $project-manager 记下一个需求：支持导出聊天记录。 |
 | 查看需求 | 使用 $project-manager 展示需求清单和完成情况。 |
 | 拆解工作 | 使用 $project-manager 把导出聊天记录这个想法拆成任务。 |
@@ -45,6 +46,7 @@
 .project/
 ├── INDEX.md                 # 总入口和模块导航
 ├── PROJECT.md               # 项目用途、目标、范围与约束
+├── CONVENTIONS.md           # （可选）当前项目的编码规范、架构约束与开发红线
 ├── BACKLOG.md               # 用户主动添加的需求与完成复选框
 ├── STATE.md                 # 当前状态、阻塞和下一步
 ├── modules/
@@ -88,7 +90,7 @@
 - [SKILL.md](skills/project-manager/SKILL.md)：技能入口与共用规则。
 - [scripts/check_project.py](skills/project-manager/scripts/check_project.py)：零依赖校验脚本（任务 ID/依赖/统计、相对链接、MAP 路径核对与 `--next-id`）。
 - [references/](skills/project-manager/references/)：初始化、需求收集、任务规划、协作和进度核实流程。
-- [assets/templates/](skills/project-manager/assets/templates/)：11 个项目资料模板（含 `AGENTS.md` 轻量同步片段 `agents-snippet.md`）。
+- [assets/templates/](skills/project-manager/assets/templates/)：12 个项目资料模板（含可选 `conventions.md` 与 `AGENTS.md` 轻量同步片段 `agents-snippet.md`）。
 - [agents/openai.yaml](skills/project-manager/agents/openai.yaml)：技能界面信息。
 
 维护技能时修改 `skills/project-manager/`；更新安装副本时保留使用者项目中的 `.project/` 资料。

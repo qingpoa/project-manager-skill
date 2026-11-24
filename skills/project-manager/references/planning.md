@@ -2,7 +2,9 @@
 
 ## 输入与输出
 
-从 PROJECT、BACKLOG、已有设计和涉及模块的 CONTEXT 开始，复用已有任务。仅盘点已有工作时不要主动扩张产品范围。使用 [task.md](../assets/templates/task.md) 建立独立任务；涉及多个任务、需要集中说明方案时使用 [plan.md](../assets/templates/plan.md)。简单工作只建立任务，不额外创建功能目录。
+从 PROJECT、CONVENTIONS（若已启用）、BACKLOG、已有设计和涉及模块的 CONTEXT 开始，复用已有任务。仅盘点已有工作时不要主动扩张产品范围。使用 [task.md](../assets/templates/task.md) 建立独立任务；涉及多个任务、需要集中说明方案时使用 [plan.md](../assets/templates/plan.md)。简单工作只建立任务，不额外创建功能目录。
+
+若项目存在 `.project/CONVENTIONS.md`，拆解任务或设计接入点时先对照其架构边界、扩展约定与禁用反模式，避免规划出违背项目规范的实现方式。
 
 从用户需求清单安排工作时遵循 [backlog.md](backlog.md)：用户明确要求添加时才在 BACKLOG 追加简短复选框；要求拆解或实现时建立任务，必要时补集中计划。范围歧义和实现分析写在任务/计划中。用户提出开发要求但未要求加入清单时，可以直接建任务，不自动添加 BACKLOG 条目。
 

@@ -568,6 +568,27 @@ def check_maps_and_git(
     }
 
 
+def check_conventions(project_dir: Path, warnings: list[dict[str, str]]) -> dict[str, Any]:
+    conventions_file = project_dir / "CONVENTIONS.md"
+    if not conventions_file.is_file():
+        return {"present": False, "linked_in_index": None}
+
+    index_file = project_dir / "INDEX.md"
+    linked = False
+    if index_file.is_file():
+        index_text = index_file.read_text(encoding="utf-8-sig", errors="replace")
+        linked = "CONVENTIONS.md" in index_text
+    if not linked:
+        warnings.append(
+            {
+                "code": "conventions_unlinked_in_index",
+                "path": ".project/INDEX.md",
+                "message": "已启用 .project/CONVENTIONS.md，但 INDEX.md 尚未链接该规范入口",
+            }
+        )
+    return {"present": True, "linked_in_index": linked}
+
+
 def render_text_report(report: dict[str, Any]) -> str:
     lines: list[str] = []
     lines.append(f"=== .project 校验报告 ({report['root']}) ===")
@@ -592,6 +613,11 @@ def render_text_report(report: dict[str, Any]) -> str:
         f"链接与地图: 校验相对链接 {report['links_checked']} 个; "
         f"MAP 文件 {report['maps']['map_file_count']} 份, 登记路径 {report['maps']['mapped_path_count']} 条"
     )
+    conventions = report.get("conventions") or {}
+    if conventions.get("present"):
+        lines.append("编码规范: 已启用 (.project/CONVENTIONS.md)")
+    else:
+        lines.append("编码规范: 未启用（可选）")
 
     lines.append(f"\n错误 ({len(report['errors'])}):")
     if not report["errors"]:
@@ -641,12 +667,14 @@ def main() -> int:
     task_summary = check_tasks(project_dir, args.archive_threshold, errors, warnings)
     links_checked = check_links(root, project_dir, errors, warnings)
     map_summary = check_maps_and_git(root, project_dir, errors, warnings)
+    conventions_summary = check_conventions(project_dir, warnings)
 
     report = {
         "root": str(root),
         "tasks": task_summary,
         "links_checked": links_checked,
         "maps": map_summary,
+        "conventions": conventions_summary,
         "errors": errors,
         "warnings": warnings,
     }
